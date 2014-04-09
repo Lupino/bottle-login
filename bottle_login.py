@@ -29,8 +29,8 @@ class LoginPlugin(object):
                 continue
             if other.keyword == self.keyword:
                 raise PluginError("Found another login plugin with conflicting settings (non-unique keyword).")
-        self.app.hooks.add('before_request', self.load_session)
-        self.app.hooks.add('after_request', self.set_session)
+        self.app.add_hook('before_request', self.load_session)
+        self.app.add_hook('after_request', self.set_session)
         self.app.login = self.login
         
     def load_session(self):
